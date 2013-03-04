@@ -1,0 +1,10 @@
+server 195.64.92.136
+update delete limbo.unfix.org A
+update delete limbo.unfix.org AAAA
+update delete limbo.ipv4.unfix.org A
+update delete limbo.ipv6.unfix.org AAAA
+update add limbo.unfix.org 360 A 10.100.13.33
+update add limbo.ipv4.unfix.org 360 A 10.100.13.33
+update add limbo.unfix.org 360 AAAA 3ffe:8114:2000:240:200:39ff:fe77:1f3f
+update add limbo.ipv6.unfix.org 360 AAAA 3ffe:8114:2000:240:200:39ff:fe77:1f3f
+send
