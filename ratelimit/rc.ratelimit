@@ -1,0 +1,55 @@
+#!/bin/sh
+################################################
+## Connection Attempt Ratelimitting
+## Jeroen Massar <jeroen@unfix.org>
+################################################
+
+## Whitelist
+WHITELIST_IPV4="192.0.2.1 192.0.2.42"
+
+# SSH, SMTP, ident
+RATELIMIT_PORTS=22,25,113
+
+################################################
+# Note: When re-running, don't forget to:
+# iptables -F INPUT
+# iptables -F INPUT -t mangle
+
+################################################
+# Make our whitelist, on top so accept them always
+################################################
+for i in ${WHITELIST_IPV4};
+do
+	iptables -A INPUT -s $i -m recent --remove --name RATELIMITED -j ACCEPT
+done
+
+################################################
+## Recent table 'RATELIMITED' when matching the destination port
+################################################
+iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --set --name RATELIMITED
+
+################################################
+## Drop things with mark set to 22 (Ratelimitted)
+################################################
+iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m mark --mark 22 -j DROP
+
+################################################
+## Log new dropping packets
+################################################
+iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j LOG --log-prefix "RateLimit "
+
+################################################
+## Mark them with mark 22
+################################################
+iptables -t mangle -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j MARK --set-mark 22
+
+################################################
+## Drop them
+################################################
+iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j DROP
+
+
+################################################
+# EOF
+################################################
+
