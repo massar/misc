@@ -1,55 +1,88 @@
 #!/bin/sh
 ################################################
 ## Connection Attempt Ratelimitting
-## Jeroen Massar <jeroen@unfix.org>
+## Jeroen Massar <jeroen@massar.ch>
 ################################################
 
-## Whitelist
-WHITELIST_IPV4="192.0.2.1 192.0.2.42"
+# Whitelist
+WHITELIST_IPV4="192.0.2.0/24,192.168.0.0/16"
 
-# SSH, SMTP, ident
-RATELIMIT_PORTS=22,25,113
+# Ratelimit: SSH, SMTP, RDP
+RATELIMIT_PORTS=22,25,3389
+
+# iptables tools
+IP4T=iptables
+IP6T=ip6tables
+
 
 ################################################
-# Note: When re-running, don't forget to:
-# iptables -F INPUT
-# iptables -F INPUT -t mangle
+# Flush old rules
+################################################
+# IPv4
+$IP4T -F INPUT
+$IP4T -F INPUT -t mangle
+$IP4T -F PREROUTING -t raw
+$IP4T -F FORWARD
+$IP4T -F OUTPUT
+$IP4T -F PERMBLOCK 2>/dev/null || true
+$IP4T -F RATELIMIT 2>/dev/null || true
+
+# IPv6
+$IP6T -F FORWARD
+
 
 ################################################
+## Avoid tracking for anything but what we rate limit
+################################################
+$IP4T -t raw -A PREROUTING -p tcp -m multiport ! --dports ${RATELIMIT_PORTS} -j CT --notrack
+$IP4T -t raw -A PREROUTING ! -p tcp -j CT --notrack
+
+
+################################################
+## Permanent blocking chain + log entry
+################################################
+$IP4T -N PERMBLOCK 2>/dev/null || true
+$IP4T -A PERMBLOCK -j LOG --log-prefix "RateLimit "
+$IP4T -A PERMBLOCK -p tcp -m recent --set --name RATELIMITED -j DROP
+
+
+################################################
+## RATELIMIT chain
+################################################
+$IP4T -N RATELIMIT 2>/dev/null || true
+
 # Make our whitelist, on top so accept them always
-################################################
 for i in ${WHITELIST_IPV4};
 do
-	iptables -A INPUT -s $i -m recent --remove --name RATELIMITED -j ACCEPT
+	$IP4T -A RATELIMIT -s $i -m recent --remove --name RATELIMITED -j ACCEPT
 done
 
-################################################
-## Recent table 'RATELIMITED' when matching the destination port
-################################################
-iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --set --name RATELIMITED
+# Silently drop packets already in the RATELIMITED list
+$IP4T -A RATELIMIT -p tcp -m recent --rcheck --name RATELIMITED -j DROP
 
-################################################
-## Drop things with mark set to 22 (Ratelimitted)
-################################################
-iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m mark --mark 22 -j DROP
+# Put repeat offenders in the PERMBLOCK chain (see above)
+$IP4T -A RATELIMIT -p tcp -m multiport --dports ${RATELIMIT_PORTS}	\
+	--syn -m conntrack --ctstate NEW -m recent			\
+	--rcheck --hitcount 6 --name RATELIMIT --seconds 60		\
+	-j PERMBLOCK
 
-################################################
-## Log new dropping packets
-################################################
-iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j LOG --log-prefix "RateLimit "
+# If more than 3 NEWs per 30 seconds, REJECT it
+# This indicates to good clients that they should stop hammering
+$IP4T -A RATELIMIT -p tcp -m multiport --dports ${RATELIMIT_PORTS}	\
+	--syn -m conntrack --ctstate NEW -m recent			\
+	--update --hitcount 3 --name RATELIMIT --seconds 30		\
+	-j REJECT --reject-with tcp-reset
 
-################################################
-## Mark them with mark 22
-################################################
-iptables -t mangle -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j MARK --set-mark 22
-
-################################################
-## Drop them
-################################################
-iptables -A INPUT -p tcp -m multiport --dports ${RATELIMIT_PORTS} -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --rttl --name RATELIMITED -j DROP
+# Put all incoming NEW connections in the "RATELIMIT" list
+$IP4T -A RATELIMIT -p tcp -m multiport --dports ${RATELIMIT_PORTS}	\
+	--syn -m conntrack --ctstate NEW				\
+	-m recent --set --name RATELIMIT				\
+	-j ACCEPT
 
 
 ################################################
-# EOF
+## Apply our rules to both INPUT and FORWARD chains
 ################################################
+$IP4T -A INPUT -j RATELIMIT
+$IP4T -A FORWARD -j RATELIMIT
 
