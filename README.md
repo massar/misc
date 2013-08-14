@@ -9,6 +9,14 @@ Simple closedexec forcer so that open sockets don't stay open for childs.
 
 This was useful in PHP which was linked inside Apache, if one then did an exec() of sorts even port 80 would go to the forked process and thus port 80 would be occupied when one would restart Apache and then Apache would not start, the process would die and you did not have a webserver... very nasty especially because log rotations used to cause restarts
 
+customfiles
+-----------
+Have a box that is up and running 'forever', wondering what the difference is with a base Debian installation?
+
+This little perl script will try to figure out what is different compared to the Debian packages that are installed.
+Based on those differences one should then create a puppet/cfengine/ansible/etc module to automate the installation.
+Of course, it also simply allows one to identify what files to backup and what is base and thus can be skipped.
+
 fuzgoogle
 ---------
 Google interface for Eggdrop
