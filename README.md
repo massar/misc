@@ -3,6 +3,10 @@ misc
 
 Misc scripts and other doodles to keep around
 
+backup
+------
+Rsync hardlinking backup script along with a cleanup script that deletes old archives keeping every 2 weeks etc
+
 closedexec
 ----------
 Simple closedexec forcer so that open sockets don't stay open for childs.
