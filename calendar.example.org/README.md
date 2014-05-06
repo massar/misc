@@ -46,3 +46,7 @@ One could make that group not-accessible for 'other' if really wanted.
 You'll need to arrange the SSL certificates from a CA. Most CA's have proper details
 on how to request and setup these certificates, placing them in conf/ssl.{crt|key}.
 
+To generate the data/calendars.sqlite file, access https://calendar.example.org once.
+Then you should have a new data/calendars.sqlite file. Use the conf/adduser.sh script
+to add your first user.
+
