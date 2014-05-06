@@ -7,6 +7,11 @@ backup
 ------
 Rsync hardlinking backup script along with a cleanup script that deletes old archives keeping every 2 weeks etc
 
+calendar.example.org
+--------------------
+
+An example SabreDAV CalDAV server using nginx+php-fpm that works fine with iCal, iPhones etc.
+
 closedexec
 ----------
 Simple closedexec forcer so that open sockets don't stay open for childs.
