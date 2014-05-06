@@ -1,4 +1,5 @@
-= calendar.example.org - SabreDAV Calendar (CalDAV) Example with nginx =
+calendar.example.org - SabreDAV Calendar (CalDAV) Example with nginx
+====================================================================
 
 Github location: https://github.com/massar/misc/calendar.example.org/
 
@@ -9,14 +10,17 @@ For more information about SabreDAV, check out http://sabre.io/
 As mentioned in conf/www.conf:
  Please do check http://bettercrypto.org for lots of knob to tweak in the configurations
 
-== Directory structure ==
-The following directories are included.
+Directory structure
+-------------------
+The following directories are included in this package:
+
 conf/ - contains the nginx configuration include
 data/ - contains the sqlite database used by SabreDAV
 inc/  - contains links to the upstream git reps for SabreDAV
 www/  - contains the single index.php that calls SabreDAV to handle everything
 
-== Installation ==
+Installation
+------------
 
 As several components have to be installed that run as different users some steps will have to be done as the root user.
 
