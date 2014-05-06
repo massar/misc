@@ -1,0 +1,12 @@
+[submodule "calendar.example.org/inc/sabre-dav"]
+	path = calendar.example.org/inc/sabre-dav
+	url = https://github.com/fruux/sabre-dav.git
+[submodule "calendar.example.org/inc/sabre-event"]
+	path = calendar.example.org/inc/sabre-event
+	url = https://github.com/fruux/sabre-event.git
+[submodule "calendar.example.org/inc/sabre-http"]
+	path = calendar.example.org/inc/sabre-http
+	url = https://github.com/fruux/sabre-http.git
+[submodule "calendar.example.org/inc/sabre-vobject"]
+	path = calendar.example.org/inc/sabre-vobject
+	url = https://github.com/fruux/sabre-vobject.git
