@@ -12,6 +12,15 @@ calendar.example.org
 
 An example SabreDAV CalDAV server using nginx+php-fpm that works fine with iCal, iPhones etc.
 
+check_gtube
+-----------
+
+This script tests if GTUBE messages are passed through sendmail + spamassassin/spamass-milter.
+If the message gets rejected it is considered fine, otherwise critical is raised.
+
+The result can be hooked into nagios so that one can test if the spam-checker still works.
+(sometimes spamass-milter fails/stops and/or you just forget to configure it to reject...)
+
 closedexec
 ----------
 Simple closedexec forcer so that open sockets don't stay open for childs.
