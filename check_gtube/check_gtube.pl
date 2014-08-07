@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+# nagios: -epn
 ###################################################################
 # check_gtube.pl by Jeroen Massar <jeroen@massar.ch>
 #                for PaPHosting (http://www.paphosting.net)
@@ -18,6 +19,8 @@ use IO::Socket::SSL qw(SSL_VERIFY_NONE);
 use POSIX qw(strftime);
 use Getopt::Long;
 use Net::SMTP;
+use Net::SMTP::SSL;
+use Net::Domain qw(hostfqdn);
 
 my $opts = {
 	'debug'		=> 0,
@@ -28,7 +31,8 @@ my $opts = {
 	'smtp-starttls'	=> 0,
 	'mail-from'	=> "<>",
 	'mail-to'	=> "",
-	'mail-subject'	=> "Nagios GTUBE test"
+	'mail-subject'	=> "Nagios GTUBE test",
+	'hello'		=> hostfqdn
 };
 
 Getopt::Long::Configure(qw{no_auto_abbrev no_ignore_case_always});
@@ -50,8 +54,11 @@ my $smtp = Net::SMTP->new(
 		$opts->{'smtp-server'},
 		Port => $opts->{'smtp-port'},
 		Timeout => $opts->{'smtp-timeout'},
-		Debug => $opts->{'debug'}
+		Debug => $opts->{'debug'},
+		Hello => $opts->{'hello'}
 	);
+
+nagios_critical("Could not init SMTP object $@") unless defined $smtp;
 
 if ($opts->{'smtp-ssl'}) {
 	$smtp = Net::SMTP::SSL->start_SSL(
@@ -59,7 +66,7 @@ if ($opts->{'smtp-ssl'}) {
 		SSL_verify_mode => SSL_VERIFY_NONE
 	);
 
-	nagios_critical("Could not start TLS")
+	nagios_critical("Could not connect with SSL")
 		unless $smtp->code == 220;
 
 } elsif ($opts->{'smtp-starttls'}) {
@@ -72,8 +79,6 @@ if ($opts->{'smtp-ssl'}) {
 			$smtp,
 			SSL_verify_mode => SSL_VERIFY_NONE
 			);
-
-	$smtp->hello();
 }
 
 # Send a SPAM mail (GTUBE) that should be rejected
