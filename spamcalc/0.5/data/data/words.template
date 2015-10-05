@@ -1,0 +1,44 @@
+# Generic spam file
+#
+# When making a spam file for a new language, please use this template.
+# When filling each category, add words alphabetically so that it's easy
+# to see if a word is already present.
+# 
+# Syntax of this file:
+# Empty lines are ignored
+# Everything after and including a hash (#) on a line is ignored
+# Lines with data consist of a word, one or more spaces, and an integer
+# spam value.
+#
+# If you want to get this wordfile to the author of the spamcalc script,
+# email it to spamwords@garion.org
+
+# Pronouns
+# (I, you, their)
+
+
+# Verbs
+# (go, die, have)
+
+
+# Adjectives
+# (hard, big, cool, strong)
+
+
+# Propositions
+# (in, at, around, through) 
+
+
+# Nouns
+# (power, king, god, master)
+
+
+# Swearwords
+# (fuck, asshole, suck)
+
+
+# Miscellaneous words
+# (the rest)
+
+
+

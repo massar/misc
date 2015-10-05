@@ -1,0 +1,30 @@
+Spamcalc feedback
+
+Last modified on 1 April 2002.
+
+Do you want to send feedback to the author?
+First, all email with comments are welcome. My email address is
+joost@carnique.nl.
+
+To test the script, massive amounts of hostnames are used. If you have a big
+list of hostnames and are willing to share them, please make a text file with
+exactly 1 hostname per line (no trailing dots or anything) and email them to
+joost@carnique.nl.
+
+The data lists of the script are still very limited at the moment. More
+spam words with spam scores are needed to make the script better.
+In the data dir there is a file "words.template" which you can use to make
+a complete word file for a language of which there is no word file yet. Or
+you could make a list of additional words of an existing language.
+Or, you could suggest changes in an existing word list.
+
+The big question is how to score certain words. To be short: I don't know.
+If a word has a very large chance of being spammy, I usually give it between
+70 and 150 points. If it's just a 'small' spamword, I give it between 20
+and 70 points.
+
+Also, lists of domains with either a positive or negative spam value are 
+are very welcome. Check the algorithms file to see what this means.
+Please send them.
+
+All feedback is welcome!

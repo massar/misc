@@ -1,0 +1,9 @@
+# This is a list of all the files that contain regular expressions with
+# corresponding penalty value.
+
+# You can define a subdir in which all the datafiles are stored here.
+# Don't add a trailing / .
+subdir = data
+
+regexps.general
+regexps.nonspam

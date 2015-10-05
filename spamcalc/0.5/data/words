@@ -1,0 +1,17 @@
+# Here follows a list of files with spamwords in them.
+
+# You can define a subdir in which all the datafiles are stored here.
+# Don't add a trailing / .
+subdir=data
+
+# General files with wordlists in them
+words.negative
+words.swear
+
+# Language-specific wordlists
+words.de
+words.it
+words.nl
+words.pl
+words.uk
+

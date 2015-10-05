@@ -1,0 +1,43 @@
+Spamcalc TODO list
+
+Last modified on 1 April 2002.
+
+There is a huge todo list, as this is only version 0.5 of the script.
+For now, just the list, not the exact descriptions, so that the script
+can be released asap :)
+
+* More and more accurate penalty values are needed.
+This item will never be removed from the todo list.
+Always, the lists of words, regexps and domains will need perfecting.
+So don't hesitate to comment on the penalty values and/or send me additional
+lists of spamwords (in any language). Check the file 'feedback' for extra
+information on this.
+
+* Error reporting and stuff like that
+This was only my first perl script ever. Therefore, I did not use OO or any
+special functions, simply because I don't know them. There probably is an
+amazing function for parsing the command line or to give errors, but I just
+have no clue about that :)
+Tell me if you know of any improvements.
+
+* The algorithms needs improvement and fine-tuning.
+At the moment, only 3 algorithms are used to determine the spam score. There
+are several more that could (and will be) implemented:
+ * Consider .co.uk and .com.au as 1 field, not as 2
+ * Check for sequential words (i.am, is.my)
+ * Check for rAnDom CaPS
+ * Check for certain words at the beginning (i, you, he, what)
+ * Check for multple-words-in.one-word-of-the.host
+ * Check for l33t1sms
+ * Add penalty for total length of hostname (strlen())
+ * Calculate word penalties using trigrams
+ * Check for lemona.de or cr.yp.to like spam
+ * Check for repetition of fields (h4r.h4r.h4r.net)
+ * Negative spamvalues that span more than 1 field
+
+* The perl script needs improvement
+ * merge the Read{Word,Regexp,Domains}File(s) from 6 functions into 2
+ * think about what to do when spamword is seen twice in the words files
+
+If you have any additions, or have coded some perl for one of the items on
+the TODO list, don't hesitate to contact me on joost@carnique.nl.

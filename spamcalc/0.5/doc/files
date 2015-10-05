@@ -1,0 +1,13 @@
+Spamcalc files
+
+Last modified on 31 March 2002.
+
+Here is a short list of all the files that spamcalc needs:
+
+sc.pl         - the main script
+sc.conf       - the main configuration file
+words         - the master word file
+regexps       - the master regexps file
+domains       - the master domains file
+docs/*        - the documentation
+data/*        - the actual data files 

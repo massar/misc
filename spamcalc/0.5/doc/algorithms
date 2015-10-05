@@ -1,0 +1,66 @@
+The algorithms of spamcalc.
+
+Last modified on 31 March 2002.
+
+
+First, some definitions:
+The hostname "this.is.a.c00l.hostname.nl" has several properties.
+The tld (top-level domain) is "nl".
+The domain is "hostname.nl".
+The fields, six of them, are this, is, a, c00l, hostname and nl.
+
+
+The spamcalc script uses a few simple tests to determine the spam score for
+a hostname:
+* field test
+* number of fields test
+* domain test
+
+At the moment these are the only implemented tests. There are several more
+tests that will be implemented in higher versions; for a list of those, check
+the "todo" file.
+
+Each hostname starts with a base score of 0 points. For each test, an amount
+of points is added (or, rarely, subtracted). In the end a total score is
+calculated.
+
+Explanation of the tests:
+
+* field test
+Each field of the hostname, excluding the two last fields, is tested with 2
+lists: a list of spammy words, and a list of spammy regexps. 
+The list of words has entries like "is" with a penalty score of 81, and 
+"likes" with a score of 73 points. This means that if a field corresponds 
+exactly with an entry in the list of spamwords, it is awarded the amount of 
+points for that spam word.
+The list of regular expressions works in the same way. If a field is matched
+by one of the regular expressions, more points are added.
+
+* number of fields test
+The total number of fields (which is the number of dots plus one) is counted
+and a spam value is calculated. The more fields, the higher the spam value.
+
+* domain test
+The domain name is checked with the list of domains to see if the base score
+should be changed from 0 to a lower (probably no dnsspam for this domain) or a
+higher (lots of dnsspam hostnames from this domain) value.
+Examples: the domain home.com has a penalty of -15 points (so actually a bonus
+because home.com is known to make non-spammy hostnames) and g0d.nl has a
+penalty of +18 points, thus making any hostname ending in .g0d.nl 18 points
+closer to spam.
+
+At the end, all these values are added and they form the final score.
+
+Example:
+
+calis:~/spam$ ./sc.pl -v this.is.a.c00l.hostname.nl
+this.is.a.c00l.hostname.nl
+Added 98 points for "this" via wordmatch.
+Added 81 points for "is" via wordmatch.
+Added 95 points for "a" via wordmatch.
+Added 77 points for "c00l" via regexpmatch of ^[kc](oo|00)l.
+Added 14 points for containing 6 fields.
+Total of 365 for this.is.a.c00l.hostname.nl.
+
+So this hostname is definitely spam. :)
+

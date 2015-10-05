@@ -1,0 +1,12 @@
+# negative penalties
+cable		-21
+core		-25
+dial		-12
+dsl		-15
+eu		-9
+home		-10
+ipv6		-20
+nl		-11
+online		-9
+ppp		-17
+router		-15

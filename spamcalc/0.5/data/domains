@@ -1,0 +1,20 @@
+# domains
+#
+# This file contains a list of files with domain scores in them.
+#
+# Each domain can have a positive score, indication a higher possibility
+# that a hostname ending within that domain is a spamhost, or a negative
+# score, reducing the possibility that the hostname is spam.
+#
+# Useful for domains like home.com which have a very hiererarchical
+# structure, and for domains that contain lots of spam hosts.
+
+# You can define a subdir in which all the datafiles are stored here.
+# Don't add a trailing / .
+subdir=data
+
+# Domains that are not so spammy
+domains.whitelist
+
+# Domains that contain lots of spamhosts
+domains.blacklist

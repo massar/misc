@@ -1,0 +1,6 @@
+# Regexps that indicate a non-spammy hostname.
+
+^ppp			-15
+^dial			-15
+^ipv6			-15
+^modem			-10

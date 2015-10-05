@@ -1,0 +1,35 @@
+Spamcalc command line arguments.
+
+Last modified on 1 April 2002.
+
+This file provides a list of available command line arguments and what they
+do.
+
+-b
+Turns on bare output. This is very useful if you want to use the spam value
+of a single hostname in other applications. Normally the output of the script
+is something like "251 - who.is.your.daddy.com" but with the -b option the
+output would just be "251".
+
+-c <filename>
+Sets the location of the configuration file. Usually this is the file
+sc.conf in the same dir. If you don't specify the -c option, spamcalc will
+look for sc.conf in the directory where it is located itself.
+
+-d <value>
+Sets the debug level so one can see exactly what the script is doing (or
+failing to do). If the script is giving errors, set the debug value to 2 or
+3 to better understand what's going on. Default value: 0.
+
+-f <filename>
+Read all the hostnames in this file and calculate their dnsspam value. The
+file should consists of exactly 1 hostname per line and nothing else.
+
+-v
+Turns on the verbose mode. This will give a short report for each hostname that
+has been calculated with the calculation used to obtain its spam value.
+
+All other words on the command line are considered hostnames that need to be 
+calculated. A list will be made of all the hostnames given in the command line
+and/or in the file provided by the -f option and then calculated.
+

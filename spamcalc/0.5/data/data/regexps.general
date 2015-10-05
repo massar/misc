@@ -1,0 +1,14 @@
+# Regexps
+
+f[us]ck			123
+[0o]wn[sz]?		141
+l[4a]m[3e](r[zs5]?|st)	76
+rul[3e][szd5]?		85
+[5s]h[1i][t7]		76
+g[o0]d			45
+^[kc](oo|00)l		77
+h[4a]xx[o0]r([s5z]|[e3]d)?	131
+
+# German pronouns
+[mds]?ein(e[rsmn])?	75
+

@@ -1,0 +1,122 @@
+Spamcalc
+
+Last modified on 1 April 2002.
+
+A dns spam calculation program.
+Created by Joost "Garion" Vunderink.
+
+In this document you will find a short introduction to this script. The
+following topics will be dealt with:
+
+* What is dns spam?
+* What does the script do?
+* What are the weaknesses of the script?
+* How does the script work? Which algorithms does it use?
+* How did you determine the penalty scores for the words?
+* Which score marks the transition for no spam to spam?
+* Is there a maximum score? Which hostname causes it?
+* Why do I get negative scores?
+* Hey, your script did not detect this hostname as spam!
+* How can I help with improving the script?
+
+
+* What is dns spam?
+
+According to RFC1178, hostnames should be constructed in a hierarchical way,
+for example computername.subdomain.domain.country. Making 'cool' hostnames
+like i.am.the.coolest.person.at.domain.country is in contradiction with this
+RFC and is a bad thing for several reasons. Find more information on what
+dns spam is on http://www.dnsspam.nl/ (this page is in english).
+
+Hostnames that are considered dns spam are hostnames with (a part of) a
+sentence in them (master.of.the.world.net), swearwords
+(shittywhore.armaster.roadkill.net) and other forms of unwanted textual data
+(666666666666666666666666666666666.sixtysix.org, 0-1-2-3-4-5.blah.com).
+
+
+* What does the script do?
+
+The script takes a hostname or a list of hostnames and determines a dns spam
+score for each hostname. This value is an indication for the spam-ness of the
+hostname. The higher the score, the higher the chance that the hostname is
+actually a dns spam hostname.
+
+Note that this is just an indication. The script uses a few very simple
+algorithms to determine the spam score, and it is therefore not foolproof.
+This script is not meant as a replacement for human judgement, because that
+would be unrealistic. It is only meant as support in finding dns spam.
+
+Because the script is not even close to the dns spam detection capabilities
+of a human being, there is always the chance that so-called false positives
+and false negatives occur. False positive are non-dnsspam hostnames which
+get assigned a score that is too high, and false negatives are spam-hostnames
+that are scored too low.
+
+
+* What are the weaknesses of the script?
+
+There is one major weakness and that is that the script is not a human being.
+This means that some hostnames will be misjudged. Most often this will be
+caused by the fact that some hostname uses a way of spamming, or a certain
+word, that is not present in the datafiles of the script.
+
+
+* How does the script work? Which algorithms does it use?
+
+Read the file 'algorithms' for this information.
+
+
+* How did you determine the penalty scores for the words?
+
+Read the file 'feedback' for a short answer to this question.
+
+
+* Which score marks the transition for no spam to spam?
+
+There is no one score the boundary between no spam and spam. This script
+does not decide whether a hostname is dns spam, it just gives an indication
+for the chance that it is a dns spam hostname.
+
+However, experience shows that hostnames with a score of over 50 are usually
+dns spam host, and a score of over 100 means that it's almost certainly a
+dns spam hostname.
+
+
+* Is there a maximum score? Which hostname causes it?
+
+Yes, actually there is a maximum score. So it's no use making funny domain
+names to see if you can beat it, because you can't. The domain consisting
+of only "a."'s, ending in .tv and consisting of 255 characters scores a
+whopping 1,918,514 points.
+
+
+* Why do I get negative scores?
+
+Congratulations, you have such a good hostname that it is considered to be
+ultra-non-spam. For certain properties of the hostname (for example, 
+containing 'adsl' or 'ppp') a negative amount of points is awarded. This is
+because sometimes legal hostnames with many fields get too many points. If
+they contain the words 'ppp' or 'adsl', indicating that it's actually a non-
+spammy hostname, some points are subtracted, hopefully bringing it back to
+a spam score that does not indicate a spam hostname.
+
+
+* Hey, your script did not detect this hostname as spam!
+
+I am not surprised. The word lists are just in a very embryonic state yet;
+they are far from complete. Your spammy hostname probably uses certain words
+that are not recognized by the script yet. This is why feedback is very
+important: the lists of spamwords must grow for the script to work better.
+
+
+* How can I help with improving the script?
+
+The best way to help is to create datafiles and send them to me. Suggestions
+about the script itself are very welcome too, of course. More information
+about this can be found in the "feedback" file.
+
+
+I hope you enjoy the script. Any feedback is welcome; you can email this
+to joost@carnique.nl or talk to me on IRCNet (my nick there is Garion).
+
+Joost Vunderink.
