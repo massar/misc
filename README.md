@@ -7,6 +7,13 @@ backup
 ------
 Rsync hardlinking backup script along with a cleanup script that deletes old archives keeping every 2 weeks etc
 
+beamote
+-------
+Beamote (Beamer Remote) allows one to control a Panasonic Projector (eg PT-AX200E)
+using the serial control protocol defined by Panasonic.
+
+Includes details on building a ET-ADSER cable, in case one cannot find one in the stores.
+
 calendar.example.org
 --------------------
 
