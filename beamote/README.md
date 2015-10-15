@@ -41,13 +41,12 @@ Do watch out that Raspberry & Arduino's are TTL level, thus you need to convert 
 
 We use a standard USB-Serial RS232-C connector.
 
-+-----+----------+
-| Pin | Function |
-+-----+----------+
-| 1   | GND      |
-| 2   | TXD      |
-| 3   | RXD      |
-+-----+----------+
+Pin | Function
+--- | --------
+ 1  | GND     
+ 2  | TXD     
+ 3  | RXD     
+--- | --------
 
 ## Projector Side
 
@@ -61,18 +60,16 @@ http://www.lindy-usa.com/8-pin-Mini-DIN-cable-connector-connector-5m-31539.html
     ^
 ```
 
-+-----+--------+----------+
-| Pin | Color  | Function |
-+-----+--------+----------+
-| 1   | brown  |          |
-| 2   | black  |          |
-| 3   | yellow | RXD      |
-| 4   | orange | GND      |
-| 5   | red    | TXD      |
-| 6   | purple |          |
-| 7   | blue   |          |
-| 8   | green  |          |
-+-----+--------+----------+
+Pin  | Color  | Function
+---- | ------ | --------
+ 1   | brown  |          
+ 2   | black  |          
+ 3   | yellow | RXD      
+ 4   | orange | GND      
+ 5   | red    | TXD      
+ 6   | purple |          
+ 7   | blue   |          
+ 8   | green  |          
 
 ## Hook it up
 
