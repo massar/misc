@@ -67,6 +67,10 @@ spamcalc
 --------
 Little spamcalc script for eggdrops, to directly call the spamcalc command when a host joins
 
+ubiquiti_video_proxy
+--------------------
+Configuration snippets on how to set up a Ubiquiti Unifi Video controller behind a HTTPS proxy (nginx).
+
 windows_dynamicdns_update
 -------------------------
 A way to do DNS updates on Windows
