@@ -24,6 +24,9 @@ And then the requests for the live view end up at the wrong host (controller.exa
 
 Bug report is filed, hopefully they enable a setting for configuring the external hostname.
 
+Note: There is a "Life View fix" section in the config this will replace the Controller's Hostname with the external hostname.
+with that fix, all traffic gets sent over your HTTPS proxy.
+
 ### iOS / iPhone app
 
 The iPhone app still needs port 7080 (plaintext HTTP) for some requests it seems, hence why it is included.
