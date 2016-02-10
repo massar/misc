@@ -21,8 +21,8 @@ Note that this is *NOT* TTL level serial, just plain old RS-232C.
 
 Specifications can be found in Panasonic's documentation available at:
 
-* ftp://ftp.panasonic.com/pub/Panasonic/Drivers/PBTS/manuals/adser.pdf [Panasonic ET-ADSER.pdf]
-* https://eww.pavc.panasonic.co.jp/projector/extranet/main/rs232c/AX200_RS232C.pdf [AX200_RS232C.pdf]
+ * ftp://ftp.panasonic.com/pub/Panasonic/Drivers/PBTS/manuals/adser.pdf [local](Panasonic ET-ADSER.pdf)
+ * https://eww.pavc.panasonic.co.jp/projector/extranet/main/rs232c/AX200_RS232C.pdf [local](AX200_RS232C.pdf)
 
 This ET-ADSER serial cable is a bit non-standard and retails, if you can get it, for about 80 USD.
 As availability of the cable is limited where I live and paying import taxes for a simple cable like
@@ -50,8 +50,7 @@ Pin | Function
 
 ## Projector Side
 
-Lindy Mini DIN-Kabel, ST-ST (2m, Grey)
-http://www.lindy-usa.com/8-pin-Mini-DIN-cable-connector-connector-5m-31539.html
+[Lindy Mini DIN-Kabel, ST-ST (2m, Grey)](http://www.lindy-usa.com/8-pin-Mini-DIN-cable-connector-connector-5m-31539.html)
 
 ```
  1     2
