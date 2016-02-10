@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ $# -ne 1 ];
+	echo "ERROR: SSH Hostname required as a parameter"
+	exit
+fi
+
+HOST=$1
+
+which terminal-notifier >/dev/null 2>/dev/null
+if [ $? -ne 0 ];
+then
+	echo "ERROR: Missing terminal-notifier"
+	echo "Please: brew install which terminal-notifier"
+	exit
+fi
+
+irssi_notifier() {
+	ssh ${HOST} 'echo -n "" > ~/.irssi/fnotify; tail -f ~/.irssi/fnotify' | \
+		while read heading message; do
+			url=`echo \"$message\" | grep -Eo 'https?://[^ >]+' | head -1`;
+
+			if [ ! "$url" ]; then
+				terminal-notifier -title "\"$heading\"" -message "\"$message\"" -activate com.googlecode.iterm2;
+			else
+				terminal-notifier -title "\"$heading\"" -message "\"$message\"" -open "\"$url\"";
+			fi;
+		done
+	terminal-notifier -title "\"irssi notifier\"" -message "\"irssi notifier disconnected, please restart\"" -activate com.googlecode.iterm2;
+}
+
+# Runs this script using nohup when it was not run as nohup yet
+echo "$@" | grep -q -- "--nohup" && irssi_notifier || nohup $0 "$@" --nohup 2>/dev/null >/dev/null &
+
+echo "Started irssi Terminal Notifier"
+
