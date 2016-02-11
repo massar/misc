@@ -23,6 +23,12 @@ An example SabreDAV CalDAV server using nginx+php-fpm that works fine with iCal,
 
 [details](calendar.example.org/)
 
+## certchaincheck
+
+A simple script for checking if a SSL certificate chain contains a SHA1 certificate.
+
+[details](certchaincheck/)
+
 ## check_mx
 
 This is a nagios plugin for checking MX status
