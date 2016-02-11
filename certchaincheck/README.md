@@ -25,7 +25,7 @@ certchaincheck.sh www.example.com 443
 ### Output
 
 ```
-$ ./sha1check.sh www.example.com 443
+$ ./certchaincheck.sh www.example.com 443
 ---------------- Certificate
 Signature Algorithm: sha256WithRSAEncryption
  Issuer: C=IL, O=StartCom Ltd., OU=Secure Digital Certificate Signing, CN=StartCom Class 2 Primary Intermediate Server CA
