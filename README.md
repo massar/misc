@@ -94,6 +94,12 @@ Little spamcalc script for eggdrops, to directly call the spamcalc command when 
 
 [details](spamcalc/)
 
+## type65_https
+
+Generates a TYPE65 DNS RRType so that it can be used today in BIND, nsd, PowerDNS, etc, till they have native support for the HTTPS and SVCB record types.
+
+[details](type65_https/)
+
 ## ubiquiti_video_proxy
 
 Configuration snippets on how to set up a Ubiquiti Unifi Video controller behind a HTTPS proxy (nginx).
