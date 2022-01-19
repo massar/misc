@@ -14,7 +14,7 @@
 #
 # Usage Examples:
 # perl type65_https.pl 'example.net HTTPS 1 . alpn="h3,h2" ipv4hint="192.0.2.42" ipv6hint="2001:db8::42"'
-# perl type65_https.pl 'example.org HTTPS example.net'
+# perl type65_https.pl 'example.org HTTPS 0 example.net'
 
 use strict;
 use vars qw($opt_r);
